@@ -1,0 +1,77 @@
+{
+  "name": "frontend-auth-boilerplate",
+  "version": "1.0.0",
+  "description": "Indicates a boilerplate for building authentication features in a frontend project.",
+  "type": "module",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yagnikvadi2003/frontend-auth-boilerplate.git",
+    "directory": "src"
+  },
+  "keywords": [
+    "TypeScript",
+    "ReactJS",
+    "Web Development"
+  ],
+  "author": {
+    "name": "Yagnik Vadi",
+    "email": "yagnikvadi8@gmail.com",
+    "url": "https://flowcv.me/yagnikvadi2003/"
+  },
+  "bugs": {
+    "url": "https://github.com/yagnikvadi2003/frontend-auth-boilerplate/issues",
+    "email": "yagnikvadi8@gmail.com"
+  },
+  "discussion": "https://github.com/yagnikvadi2003/frontend-auth-boilerplate/discussions",
+  "homepage": "https://github.com/yagnikvadi2003/frontend-auth-boilerplate#readme",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "clean": "rm -rf build",
+    "clear": "rm -rf build/ node_modules/ pnpm-lock.yaml && pnpm purge cache",
+    "commit": "commit",
+    "prepare": "husky"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/cli": "^7.24.8",
+    "@babel/core": "^7.25.2",
+    "@babel/preset-env": "^7.25.3",
+    "@babel/preset-react": "^7.24.7",
+    "@commitlint/cli": "^19.4.0",
+    "@commitlint/config-conventional": "^19.2.2",
+    "@commitlint/prompt-cli": "^19.4.0",
+    "@commitlint/types": "^19.0.3",
+    "@types/node": "^22.2.0",
+    "husky": "^9.1.4"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "pnpm commitlint"
+    }
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "cacheDirectories": [
+    "node_modules",
+    "pnpm-lock.yaml"
+  ],
+  "packageManager": "pnpm@9.5.0",
+  "engines": {
+    "node": ">=20.15.1"
+  },
+  "os": [
+    "linux"
+  ]
+}
