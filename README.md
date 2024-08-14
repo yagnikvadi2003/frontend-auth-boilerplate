@@ -6,6 +6,8 @@ Frontend Authentication Boilerplate is a project designed to help developers und
 
 - [About](#about)
 - [Installation](#installation)
+- [License](#license)
+- [Security](#security)
 
 ## About
 
@@ -19,3 +21,11 @@ To get started with the project, follow these steps:
 
    ```bash
    git clone https://github.com/yagnikvadi2003/frontend-auth-boilerplate.git
+
+## License
+
+This project is licensed under the MIT License, a permissive open-source license that allows you to freely use, modify, and distribute the software. For more detailed information, please refer to the [LICENSE](LICENSE) file included in the repository.
+
+## Security
+
+We take security seriously and appreciate your efforts to report vulnerabilities responsibly. If you discover any security issues, please follow the guidelines outlined in our [SECURITY](SECURITY.md) file. This document provides detailed instructions on how to report security concerns and how they will be addressed.
