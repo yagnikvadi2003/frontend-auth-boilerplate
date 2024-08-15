@@ -28,23 +28,41 @@
   "license": "MIT",
   "private": true,
   "scripts": {
+    "start:web": "webpack-dev-server --config ./config/webpack.config.js",
+    "start:debug:web": "webpack-dev-server --config ./config/webpack.config.js",
+    "start:staging:web": "webpack-dev-server --config ./config/webpack.config.js",
+    "start:production:web": "webpack serve --config ./config/webpack.prod.js",
+    "build:staging": "webpack --config ./config/webpack.prod.js",
+    "build:production": "webpack --config ./config/webpack.prod.js",
     "clean": "rm -rf build",
     "clear": "rm -rf build/ node_modules/ pnpm-lock.yaml && pnpm purge cache",
     "commit": "commit",
     "prepare": "husky"
   },
-  "dependencies": {},
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
   "devDependencies": {
     "@babel/cli": "^7.24.8",
     "@babel/core": "^7.25.2",
     "@babel/preset-env": "^7.25.3",
     "@babel/preset-react": "^7.24.7",
+    "@babel/preset-typescript": "^7.24.7",
     "@commitlint/cli": "^19.4.0",
     "@commitlint/config-conventional": "^19.2.2",
     "@commitlint/prompt-cli": "^19.4.0",
     "@commitlint/types": "^19.0.3",
     "@types/node": "^22.2.0",
-    "husky": "^9.1.4"
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "html-webpack-plugin": "^5.6.0",
+    "husky": "^9.1.4",
+    "typescript": "^5.5.4",
+    "webpack": "^5.93.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.0.4",
+    "webpack-merge": "^6.0.1"
   },
   "husky": {
     "hooks": {

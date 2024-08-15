@@ -23,7 +23,13 @@
      * @babel/preset-react:
      *   - Transforms JSX (JavaScript XML) syntax used in React into plain JavaScript.
      *   - Supports the creation of dynamic user interfaces by converting React components into browser-executable code.
+     *
      *   - Enables features such as automatic JSX runtime support for cleaner React syntax.
+     * @babel/preset-typescript:
+     *   - Transforms TypeScript code into JavaScript.
+     *   - Allows you to write type-safe code in TypeScript while benefiting from Babel's powerful transformation capabilities.
+     *   - Supports features like stripping out TypeScript-specific syntax (e.g., type annotations) during the compilation process.
+     *
      */
-    "presets": ["@babel/preset-env","@babel/preset-react"]
+    "presets": ["@babel/preset-env","@babel/preset-react", "@babel/preset-typescript"]
 }
