@@ -38,7 +38,7 @@
     "build:production": "webpack --config ./config/webpack.prod.js",
     "clean": "rm -rf build",
     "clear": "rm -rf build/ node_modules/ pnpm-lock.yaml && pnpm purge cache",
-    "commit": "git commit",
+    "commit": "commit",
     "prepare": "husky"
   },
   "dependencies": {
