@@ -4,6 +4,7 @@
   "description": "Indicates a boilerplate for building authentication features in a frontend project.",
   "type": "module",
   "main": "index.js",
+  "sideEffects": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/yagnikvadi2003/frontend-auth-boilerplate.git",
@@ -28,6 +29,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
+    "start": "webpack serve --config ./config/webpack.config.js",
     "start:web": "webpack-dev-server --config ./config/webpack.config.js",
     "start:debug:web": "webpack-dev-server --config ./config/webpack.config.js",
     "start:staging:web": "webpack-dev-server --config ./config/webpack.config.js",
@@ -36,7 +38,7 @@
     "build:production": "webpack --config ./config/webpack.prod.js",
     "clean": "rm -rf build",
     "clear": "rm -rf build/ node_modules/ pnpm-lock.yaml && pnpm purge cache",
-    "commit": "commit",
+    "commit": "git commit",
     "prepare": "husky"
   },
   "dependencies": {
@@ -53,11 +55,18 @@
     "@commitlint/config-conventional": "^19.2.2",
     "@commitlint/prompt-cli": "^19.4.0",
     "@commitlint/types": "^19.0.3",
+    "@types/dotenv-webpack": "^7.0.7",
     "@types/node": "^22.2.0",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
+    "@types/webpack": "^5.28.5",
+    "dotenv": "^16.4.5",
+    "dotenv-webpack": "^8.1.0",
     "html-webpack-plugin": "^5.6.0",
     "husky": "^9.1.4",
+    "terser-webpack-plugin": "^5.3.10",
+    "ts-loader": "^9.5.1",
+    "ts-node": "^10.9.2",
     "typescript": "^5.5.4",
     "webpack": "^5.93.0",
     "webpack-cli": "^5.1.4",
@@ -87,7 +96,7 @@
   ],
   "packageManager": "pnpm@9.5.0",
   "engines": {
-    "node": ">=20.15.1"
+    "node": ">=20.16.0"
   },
   "os": [
     "linux"

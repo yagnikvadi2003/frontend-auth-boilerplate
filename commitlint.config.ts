@@ -96,7 +96,7 @@ export default {
 	/*
 	 * Functions that return true if commitlint should ignore the given message.
 	 */
-	ignores: [commit => commit === ""],
+	ignores: [(commit: string) => commit === ""],
 	/*
 	 * Whether commitlint uses the default ignore rules.
 	 */
