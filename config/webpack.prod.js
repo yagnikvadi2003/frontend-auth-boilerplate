@@ -1,3 +1,5 @@
+'use strict';
+
 import webpack from "webpack";
 import TerserPlugin from "terser-webpack-plugin";
 

@@ -1,3 +1,5 @@
+'use strict';
+
 // import Dotenv from "dotenv-webpack";
 import path from "path";
 import HtmlWebpackPlugin from "html-webpack-plugin";
@@ -23,34 +25,6 @@ export default {
      * This is typically the main file of your React application.
      */
     entry: path.resolve(__dirname, "..", "src/index.tsx"),
-
-    /**
-     * @property {Object} cache
-     * Caching configuration for Webpack.
-     * Enables persistent caching for faster rebuilds.
-     */
-    cache: {
-        /**
-         * @property {string} type
-         * Defines the type of cache to use. Here, 'filesystem' caching is used to store
-         * build dependencies and cache files on the disk.
-         */
-        type: 'filesystem',
-
-        /**
-         * @property {Object} buildDependencies
-         * Specifies dependencies that affect the build. If any of these dependencies change,
-         * Webpack will invalidate the cache and rebuild.
-         */
-        buildDependencies: {
-            /**
-             * @property {Array<string>} config
-             * An array containing paths to configuration files that affect the build.
-             * Webpack will invalidate the cache if any of these files change.
-             */
-            config: [__filename],
-        },
-    },
 
     /**
      * @property {Object} optimization
@@ -296,29 +270,120 @@ export default {
      * Configuration regarding modules in Webpack.
      */
     module: {
-        /**
-         * @property {Array<Object>} rules
-         * Rules for handling different types of files.
-         */
         rules: [
             {
-                /**
-                 * @property {RegExp} test
-                 * A condition to match specific files (TypeScript and JavaScript files).
-                 */
-                test: /\.(ts|js)x?$/,
-
-                /**
-                 * @property {string} use
-                 * The loader to use for transforming matched files.
-                 */
-                use: "ts-loader",
-
-                /**
-                 * @property {RegExp} exclude
-                 * A condition to exclude specific files or directories from processing.
-                 */
+                test: /\.html$/,
                 exclude: /node_modules/,
+                loader: "html-loader",
+                options: {
+                    minimize: environment === 'production',
+                    removeComments: false,
+                    collapseWhitespace: false
+                }
+            },
+            {
+                test: /\.css$/,
+                include: path.resolve(__dirname, "..", "src"),
+                use: [
+                    environment === 'production' ? MiniCssExtractPlugin.loader : {
+                        loader: "css-loader",
+                        options: {
+                            sourceMap: environment === 'production'
+                                ? process.env.GENERATE_SOURCEMAP | 'true'
+                                : process.env.GENERATE_SOURCEMAP | 'false',
+                        },
+                    },
+                ],
+            },
+            {
+                test: /\.js$/,
+                include: path.resolve(__dirname, "..", "src"),
+                exclude: /node_modules/,
+                loader: "babel-loader",
+                options: {
+                    cacheDirectory: true,
+                    cacheCompression: false
+                }
+            },
+            {
+                test: /\.(ts|tsx)?$/,
+                include: path.resolve(__dirname, "..", "src"),
+                exclude: /node_modules/,
+                use: [
+                    {
+                        loader: "babel-loader",
+                        options: {
+                            cacheDirectory: true,
+                            cacheCompression: false
+                        }
+                    },
+                    {
+                        loader: "ts-loader",
+                    },
+                ],
+            },
+            {
+                test: /\.(png|jpe?g|gif)$/i,
+                exclude: /node_modules/,
+                use: [
+                    {
+                        loader: "file-loader",
+                        options: {
+                            regExp: /\/([a-z]+)\/[a-z]+\.(png|jpe?g|gif)$/i,
+                            name: environment === 'development' ? "[contenthash].[ext]" : "[sha512:hash:base64:7].[ext]",
+                            outputPath: 'static/assets/',
+                            publicPath: 'static/assets/',
+                            emitFile: false
+                        },
+                        parser: {
+                            dataUrlCondition: {
+                                maxSize: 5 * 1024 // 5kb
+                            }
+                        },
+                        type: "asset/resource",
+                    },
+                    {
+                        loader: 'url-loader',
+                        options: {
+                            limit: 8 * 1024, // 8 KB limit
+                            name: '[name].[hash:8].[ext]',
+                            publicPath: '/assets/',
+                            outputPath: 'assets/',
+                        },
+                    }
+                ],
+            },
+            {
+                // test: /\.svg/,
+                test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+                issuer: {
+                    and: /\.([jt]sx|mdx)$/i,
+                },
+                use: [
+                    { 
+                        loader: '@svgr/webpack',
+                        options: {
+                            icon: true,
+                            expandProps: false,
+                            babel: false
+                        },
+                        parser: {
+                            dataUrlCondition: {
+                                maxSize: 5 * 1024 // 5 kb limit
+                            }
+                        },
+                    },
+                    {
+                        loader: 'url-loader',
+                        options: {
+                            limit: 8 * 1024, // 8 KB limit
+                            name: '[name].[hash:8].[ext]',
+                            publicPath: '/assets/',
+                            outputPath: 'assets/',
+                        },
+                    }
+                ],
+                
             },
         ],
     },
