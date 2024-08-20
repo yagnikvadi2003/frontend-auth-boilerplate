@@ -276,10 +276,12 @@ export default {
                 exclude: /node_modules/,
                 loader: "html-loader",
                 options: {
-                    minimize: environment === 'production',
-                    removeComments: false,
-                    collapseWhitespace: false
-                }
+                    minimize: {
+                        removeComments: false,
+                        collapseWhitespace: false,
+                    },
+                    esModule: false,
+                },
             },
             {
                 test: /\.css$/,
@@ -325,6 +327,7 @@ export default {
             {
                 test: /\.(png|jpe?g|gif)$/i,
                 exclude: /node_modules/,
+                type: "asset/resource",
                 use: [
                     {
                         loader: "file-loader",
@@ -335,12 +338,6 @@ export default {
                             publicPath: 'static/assets/',
                             emitFile: false
                         },
-                        parser: {
-                            dataUrlCondition: {
-                                maxSize: 5 * 1024 // 5kb
-                            }
-                        },
-                        type: "asset/resource",
                     },
                     {
                         loader: 'url-loader',
@@ -352,13 +349,16 @@ export default {
                         },
                     }
                 ],
+                parser: { // Move `parser` here
+                    dataUrlCondition: {
+                        maxSize: 5 * 1024 // 5kb
+                    }
+                },
             },
             {
                 // test: /\.svg/,
                 test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-                issuer: {
-                    and: /\.([jt]sx|mdx)$/i,
-                },
+                issuer: /\.([jt]sx|mdx)$/i,
                 use: [
                     { 
                         loader: '@svgr/webpack',
@@ -366,12 +366,7 @@ export default {
                             icon: true,
                             expandProps: false,
                             babel: false
-                        },
-                        parser: {
-                            dataUrlCondition: {
-                                maxSize: 5 * 1024 // 5 kb limit
-                            }
-                        },
+                        }
                     },
                     {
                         loader: 'url-loader',
@@ -383,7 +378,11 @@ export default {
                         },
                     }
                 ],
-                
+                parser: { // Move `parser` here
+                    dataUrlCondition: {
+                        maxSize: 5 * 1024 // 5kb
+                    }
+                },
             },
         ],
     },
