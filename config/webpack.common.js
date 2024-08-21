@@ -290,9 +290,28 @@ export default {
                     environment === 'production' ? MiniCssExtractPlugin.loader : {
                         loader: "css-loader",
                         options: {
+                            sourceMap: environment === 'production' ? true : false,
+                        },
+                    },
+                ],
+            },
+            {
+                test: /\.s?[ac]ss$/,
+                use: [
+                    environment === 'production' ? MiniCssExtractPlugin.loader : "style-loader",
+                    {
+                        loader: "css-loader",
+                        options: {
                             sourceMap: environment === 'production'
-                                ? process.env.GENERATE_SOURCEMAP | 'true'
-                                : process.env.GENERATE_SOURCEMAP | 'false',
+                            ? true
+                            : false,
+                        },
+                    },
+                    {
+                        loader: "sass-loader",
+                        options: {
+                            sourceMap: environment === 'production' ? true : false,
+                            warnRuleAsWarning: true,
                         },
                     },
                 ],
@@ -325,62 +344,39 @@ export default {
                 ],
             },
             {
-                test: /\.(png|jpe?g|gif)$/i,
-                exclude: /node_modules/,
-                type: "asset/resource",
+                test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+                // EX. ==> 1. example.svg 2. example.svg?v=1.2.3
+                issuer: /\.([jt]sx|mdx)?$/,
                 use: [
                     {
-                        loader: "file-loader",
+                        loader: '@svgr/webpack',
                         options: {
-                            regExp: /\/([a-z]+)\/[a-z]+\.(png|jpe?g|gif)$/i,
-                            name: environment === 'development' ? "[contenthash].[ext]" : "[sha512:hash:base64:7].[ext]",
-                            outputPath: 'static/assets/',
-                            publicPath: 'static/assets/',
-                            emitFile: false
+                            icon: true,
                         },
                     },
                     {
                         loader: 'url-loader',
                         options: {
-                            limit: 8 * 1024, // 8 KB limit
-                            name: '[name].[hash:8].[ext]',
-                            publicPath: '/assets/',
-                            outputPath: 'assets/',
+                            limit: 6 * 1024, // 6 KB limit
+                            name: environment === 'development' ? "[path][name].[ext]" : '[name].[hash:8].[ext]',
+                            publicPath: 'assets/svg/',
+                            outputPath: 'assets/svg/',
                         },
-                    }
+                    },
                 ],
-                parser: { // Move `parser` here
+                parser: {
                     dataUrlCondition: {
-                        maxSize: 5 * 1024 // 5kb
+                        maxSize: 10 * 1024 // 10 kb
                     }
                 },
             },
             {
-                // test: /\.svg/,
-                test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-                issuer: /\.([jt]sx|mdx)$/i,
-                use: [
-                    { 
-                        loader: '@svgr/webpack',
-                        options: {
-                            icon: true,
-                            expandProps: false,
-                            babel: false
-                        }
-                    },
-                    {
-                        loader: 'url-loader',
-                        options: {
-                            limit: 8 * 1024, // 8 KB limit
-                            name: '[name].[hash:8].[ext]',
-                            publicPath: '/assets/',
-                            outputPath: 'assets/',
-                        },
-                    }
-                ],
-                parser: { // Move `parser` here
+                test: /\.(png|jpe?g|gif)$/i,
+                exclude: /node_modules/,
+                type: 'asset',
+                parser: {
                     dataUrlCondition: {
-                        maxSize: 5 * 1024 // 5kb
+                        maxSize: 10 * 1024 // 10kb limit
                     }
                 },
             },
