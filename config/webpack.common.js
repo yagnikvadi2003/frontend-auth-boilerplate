@@ -303,8 +303,8 @@ export default {
                         loader: "css-loader",
                         options: {
                             sourceMap: environment === 'production'
-                            ? true
-                            : false,
+                                ? true
+                                : false,
                         },
                     },
                     {
@@ -380,6 +380,19 @@ export default {
                     }
                 },
             },
+            {
+                test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        limit: 10 * 1024, // 10kb limit,
+                        options: {
+                            name: '[name].[ext]',
+                            outputPath: 'fonts/'
+                        }
+                    }
+                ]
+            }
         ],
     },
 
@@ -396,12 +409,12 @@ export default {
          * - `systemvars`: Allows loading system environment variables.
          * - `defaults`: Loads default variables from `.env` if not defined in environment-specific files.
          */
-        // new Dotenv({
-        //     path: `./.env.${environment}`, 
-        //     safe: true, 
-        //     systemvars: true, 
-        //     defaults: true,
-        // }),
+        new Dotenv({
+            // path: `./.env.${environment}`, 
+            safe: true, 
+            systemvars: true, 
+            defaults: true,
+        }),
 
         /**
          * @plugin {HtmlWebpackPlugin} HtmlWebpackPlugin
@@ -409,6 +422,7 @@ export default {
          * - `template`: Path to the HTML template file to use.
          */
         new HtmlWebpackPlugin({
+            title: "InterfaceGuard",
             template: path.resolve(__dirname, "..", "public/index.html"),
         }),
     ],

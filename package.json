@@ -1,13 +1,13 @@
 {
-  "name": "frontend-auth-boilerplate",
+  "name": "inter-face-guard",
   "version": "1.0.0",
-  "description": "Indicates a boilerplate for building authentication features in a frontend project.",
+  "description": "InterfaceGuard is a professional user management frontend project that combines an intuitive user interface with advanced security features, including secure authentication, role-based access control, and data privacy. It ensures a seamless user experience while prioritizing strong protection measures.",
   "type": "module",
   "main": "index.js",
   "sideEffects": false,
   "repository": {
     "type": "git",
-    "url": "https://github.com/yagnikvadi2003/frontend-auth-boilerplate.git",
+    "url": "https://github.com/yagnikvadi2003/InterfaceGuard.git",
     "directory": "src"
   },
   "keywords": [
@@ -21,11 +21,11 @@
     "url": "https://flowcv.me/yagnikvadi2003/"
   },
   "bugs": {
-    "url": "https://github.com/yagnikvadi2003/frontend-auth-boilerplate/issues",
+    "url": "https://github.com/yagnikvadi2003/InterfaceGuard/issues",
     "email": "yagnikvadi8@gmail.com"
   },
-  "discussion": "https://github.com/yagnikvadi2003/frontend-auth-boilerplate/discussions",
-  "homepage": "https://github.com/yagnikvadi2003/frontend-auth-boilerplate#readme",
+  "discussion": "https://github.com/yagnikvadi2003/InterfaceGuard/discussions",
+  "homepage": "https://github.com/yagnikvadi2003/InterfaceGuard#readme",
   "license": "MIT",
   "private": true,
   "scripts": {
