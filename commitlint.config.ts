@@ -82,9 +82,9 @@ export default {
 			[
 				"html",
 				"css",
-				"less",
 				"scss",
 				"markdown",
+				"moduleJavascript",
 				"javascript",
 				"javascriptreact",
 				"typescript",

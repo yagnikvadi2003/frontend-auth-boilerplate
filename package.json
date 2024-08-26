@@ -4,7 +4,6 @@
   "description": "InterfaceGuard is a professional user management frontend project that combines an intuitive user interface with advanced security features, including secure authentication, role-based access control, and data privacy. It ensures a seamless user experience while prioritizing strong protection measures.",
   "type": "module",
   "main": "index.js",
-  "sideEffects": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/yagnikvadi2003/InterfaceGuard.git",
@@ -29,16 +28,16 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "webpack serve --config ./config/webpack.config.js",
-    "start:web": "webpack-dev-server --config ./config/webpack.config.js",
-    "start:debug:web": "webpack-dev-server --config ./config/webpack.config.js",
-    "start:staging:web": "webpack-dev-server --config ./config/webpack.config.js",
-    "start:production:web": "webpack serve --config ./config/webpack.prod.js",
-    "build:staging": "webpack --config ./config/webpack.prod.js",
-    "build:production": "webpack --config ./config/webpack.prod.js",
+    "start:web": "NODE_ENV=development webpack-dev-server --config ./webpack/connection/webpack.config.js",
+    "start:staging:web": "NODE_ENV=staging webpack-dev-server --config ./webpack/connection/webpack.config.js",
+    "start:production:web": "NODE_ENV=production webpack serve --config ./webpack/connection/webpack.config.js",
+    "build:staging": "webpack --config ./webpack/connection/webpack.config.js",
+    "build:production": "webpack --config ./webpack/connection/webpack.config.js",
     "cache:clear:npm": "npm cache clean --force",
     "cache:clear:yarn": "yarn cache clean",
     "cache:clear:pnpm": "pnpm store prune",
+    "cache:clear": "node custom-script.mjs",
+    "check:update": "pnpm outdated",
     "clear": "rimraf node_modules dist package-lock.json yarn.lock pnpm-lock.yaml",
     "commit": "commit",
     "prepare": "husky"
@@ -57,6 +56,7 @@
     "@commitlint/config-conventional": "^19.2.2",
     "@commitlint/prompt-cli": "^19.4.0",
     "@commitlint/types": "^19.0.3",
+    "@mdx-js/loader": "^3.0.1",
     "@svgr/webpack": "^8.1.0",
     "@types/dotenv-webpack": "^7.0.7",
     "@types/node": "^22.2.0",
@@ -71,7 +71,9 @@
     "html-loader": "^5.1.0",
     "html-webpack-plugin": "^5.6.0",
     "husky": "^9.1.4",
+    "markdown-loader": "^8.0.0",
     "mini-css-extract-plugin": "^2.9.1",
+    "postcss-loader": "^8.1.1",
     "rimraf": "^6.0.1",
     "sass": "^1.77.8",
     "sass-loader": "^16.0.1",
@@ -81,7 +83,7 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.5.4",
     "url-loader": "^4.1.1",
-    "webpack": "^5.93.0",
+    "webpack": "^5.94.0",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.0.4",
     "webpack-merge": "^6.0.1"
@@ -107,9 +109,9 @@
     "node_modules",
     "pnpm-lock.yaml"
   ],
-  "packageManager": "pnpm@9.5.0",
+  "packageManager": "pnpm@9.8.0",
   "engines": {
-    "node": ">=20.16.0"
+    "node": "20.17.0"
   },
   "os": [
     "linux"

@@ -1,9 +1,9 @@
 import React from "react";
 
-// import { ReactComponent as ReactLogo } from './assets/react.svg';
-import reactLogo from "./assets/download.png";
+import { ReactComponent as ReactLogo } from './assets/svgs/react.svg';
+import reactLogo from "./assets/images/download.png";
 
-import "./app.scss";
+import "./app.css";
 
 /**
  * @component App
@@ -18,8 +18,8 @@ import "./app.scss";
 const App: React.FC = (): JSX.Element => {
   return (
     <div>
-      <h1>React User Managment</h1>
-      {/* <ReactLogo /> */}
+      <h1>React User Management</h1>
+      <ReactLogo width={50} height={50}/>
       <img src={reactLogo} alt="React logo" className="react-logo" />
     </div>
   );
