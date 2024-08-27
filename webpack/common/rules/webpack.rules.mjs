@@ -10,9 +10,16 @@
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import { inDev } from "../helpers/webpack.helpers.mjs";
 
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+// Convert the module URL to a file path
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const rules = [
     {
-        test: /\.html|md$/i,
+        test: /\.html$/i,
         exclude: /node_modules/,
         use: [
             {
@@ -25,9 +32,6 @@ const rules = [
                     minimize: inDev() ? false : true,
                     esModule: false,
                 },
-            },
-            {
-                loader: "markdown-loader",
             }
         ],
     },
@@ -62,7 +66,7 @@ const rules = [
         ],
     },
     {
-        test: /\.[jt]sx|mdx$/,
+        test: /\.[jt]sx$/,
         exclude: /(node_modules|\.webpack)/,
         use: [
             {
@@ -74,16 +78,14 @@ const rules = [
             },
             {
                 loader: "ts-loader",
-            },
-            {
-                loader: '@mdx-js/loader',
             }
         ],
     },
     {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
         // EX. ==> 1. example.svg 2. example.svg?v=1.2.3
-        issuer: /\.([jt]sx|mdx)?$/,
+        issuer: /\.([jt]sx|md|mdx)?$/,
+        include: path.resolve(__dirname, "..", "..", "..", "src/assets/svgs"),
         use: [
             {
                 loader: '@svgr/webpack',
@@ -108,7 +110,7 @@ const rules = [
         },
     },
     {
-        test: /\.(png|jpe?g|gif)$/i,
+        test: /\.(png|jpe?g|gif)(\?v=\d+\.\d+\.\d+)?$/i,
         exclude: /node_modules/,
         type: 'asset',
         generator: {
@@ -116,6 +118,7 @@ const rules = [
             publicPath: 'assets/images/',
             outputPath: 'static/images/',
         },
+        include: path.resolve(__dirname, "..", "..", "..", "src/assets/images"),
         parser: {
             dataUrlCondition: {
                 maxSize: 10 * 1024 // 10kb limit
@@ -132,6 +135,22 @@ const rules = [
                     name: inDev() ? "[name][ext][query]" : "[hash][ext][query]",
                     outputPath: 'fonts/'
                 }
+            }
+        ]
+    },
+    {
+        test: /\.md$/,
+        use: [
+            {
+                loader: "markdown-loader",
+            },
+        ],
+    },
+    {
+        test: /\.mdx?$/,
+        use: [
+            {
+                loader: '@mdx-js/loader',
             }
         ]
     }

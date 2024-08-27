@@ -42,8 +42,10 @@ export default async () => {
             rules,
         },
         output: {
+            asyncChunks: true,
             filename: "[name].js",
             chunkFilename: "[name].chunk.js",
+            path: path.resolve(__dirname, "..", "..", "dist"),
             clean: true,
         },
         plugins,
@@ -54,11 +56,17 @@ export default async () => {
         stats: "errors-warnings",
         devServer: {
             hot: true,
-            open: true,
             port: 5114,
-            // compress: true,
+            compress: true,
             webSocketServer: 'ws',
             historyApiFallback: true,
+            open: {
+                target: ['http://localhost:5114'],
+                app: {
+                    name: 'google-chrome',
+                    // arguments: ['--incognito', '--new-window'],
+                },
+            },
             client: {
                 progress: true,
                 reconnect: 5,
@@ -72,31 +80,31 @@ export default async () => {
                 },
             },
             static: {
-                directory: path.join(__dirname, "..", "..", "..", "dist"),
+                directory: path.join(__dirname, "..", "..", "dist"),
                 watch: true,
             },
-            // optimization: {
-            //     splitChunks: {
-            //         chunks: "all",
-            //     },
-            // },
-            // performance: {
-            //     hints: 'error',
-            //     maxAssetSize: 100000,         // 100 KB max per asset
-            //     maxEntrypointSize: 500000,    // 500 KB max per entry point
-            // },
-            // devMiddleware: {
-            //     index: true,
-            //     mimeTypes: { phtml: 'text/html' },
-            //     publicPath: path.resolve(__dirname, "..", "..", "..", "src/assets"),
-            //     serverSideRender: true,
-            //     writeToDisk: true,
-            // },
-            // watchOptions: {
-            //     aggregateTimeout: 300,
-            //     poll: 1000,
-            //     ignored: /node_modules/,
-            // },
+            devMiddleware: {
+                index: true,
+                mimeTypes: { phtml: 'text/html' },
+                publicPath: path.resolve(__dirname, "..", "..", "src/assets/**/*"),
+                serverSideRender: true,
+                writeToDisk: true,
+            },
         },
+        watchOptions: {
+            aggregateTimeout: 300,
+            poll: 1000,
+            ignored: /node_modules/,
+        },
+        optimization: {
+            splitChunks: {
+                chunks: "all",
+            },
+        },
+        // performance: {
+        //     hints: 'error',               // 'warning' or false can also be used
+        //     maxAssetSize: 500000,         // 500 KB max per asset
+        //     maxEntrypointSize: 500000,    // 500 KB max per entry point
+        // },
     };
 };
