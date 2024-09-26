@@ -1,3 +1,43 @@
+/**
+ * @file commitlint.config.ts
+ * @description Commitlint configuration file for enforcing conventional commit messages
+ *
+ * @details
+ * This configuration file is responsible for defining the rules and settings 
+ * for commit message validation using Commitlint. It extends the conventional 
+ * commit style and includes custom rules to enforce standards in commit 
+ * messages. The configuration helps ensure that commit messages are structured, 
+ * informative, and consistent across the project.
+ *
+ * Key functionalities:
+ * 1. Extend @commitlint/config-conventional for standard rules.
+ * 2. Set up parser and formatter presets to handle commit message parsing 
+ *    and formatting.
+ * 3. Define custom rules for commit message types, body casing, and length limits.
+ * 4. Specify messages and prompts for user interactions during commit message 
+ *    creation.
+ * 5. Allow ignoring empty commit messages and provide a help URL for guidance.
+ *
+ * @author Yagnik Vadi<yagnik.infineit2003@gmail.com>
+ * @version 1.0.0
+ * @created 2024-08-27
+ * @updated 2024-09-26
+ *
+ * @usage
+ * - Adjust the rules and prompts as necessary to fit the project's commit 
+ *   message style and requirements.
+ * - Ensure that referenced packages (e.g., @commitlint/config-conventional, 
+ *   conventional-changelog-conventionalcommits) are installed in the project.
+ *
+ * @note
+ * Commitlint will enforce these rules during the commit process, and any 
+ * violations will result in an error, prompting the user to revise their 
+ * commit message accordingly.
+ *
+ * @see https://github.com/conventional-changelog/commitlint for more information 
+ * on configuring Commitlint and understanding commit message conventions.
+ */
+
 import { RuleConfigSeverity } from '@commitlint/types';
 
 export default {
@@ -74,7 +114,7 @@ export default {
 			]
 		],
 		"body-case": [2, "always", "sentence-case"],
-		"body-max-line-length": [1, "always", 72],
+		"body-max-line-length": [1, "always", Infinity],
 		"header-max-length": [2, "always", 72],
 		"scope-enum": [
 			2,

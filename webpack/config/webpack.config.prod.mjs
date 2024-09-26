@@ -30,6 +30,7 @@ const loadRules = async () => {
         return [];
     }
 };
+
 export default async () => {
     const plugins = await loadPlugins();
     const rules = await loadRules();
