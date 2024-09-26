@@ -85,6 +85,7 @@ export default {
 				"scss",
 				"markdown",
 				"moduleJavascript",
+				"moduleECMAScript",
 				"javascript",
 				"javascriptreact",
 				"typescript",

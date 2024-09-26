@@ -38,7 +38,8 @@ const rules = [
     {
         test: /\.css|s[ac]ss$/,
         use: [
-            { loader: inDev() ? "style-loader" : MiniCssExtractPlugin.loader },
+            MiniCssExtractPlugin.loader,
+            { loader: "style-loader" },
             {
                 loader: "css-loader",
                 options: {
@@ -55,7 +56,7 @@ const rules = [
                 },
             },
             {
-                loader: inDev() ? "postcss-loader" : MiniCssExtractPlugin.loader,
+                loader: "postcss-loader",
                 options: {
                     postcssOptions: {
                         config: false,
@@ -111,6 +112,7 @@ const rules = [
     },
     {
         test: /\.(png|jpe?g|gif)(\?v=\d+\.\d+\.\d+)?$/i,
+        // EX. ==> 1. example.png 2. example.png?v=1.2.3
         exclude: /node_modules/,
         type: 'asset',
         generator: {

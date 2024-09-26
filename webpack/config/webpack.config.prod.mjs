@@ -50,10 +50,9 @@ export default async () => {
             extensions: [".js", ".ts", ".jsx", ".tsx", ".css"],
             // alias: path.resolve(__dirname, "..", "common/routes/webpack.aliases.js"),
         },
-        stats: "errors-warnings",
+        // stats: "errors-warnings",
         optimization: {
             minimize: true,
-            sideEffects: true,
             concatenateModules: true,
             runtimeChunk: "single",
             splitChunks: {
@@ -68,6 +67,11 @@ export default async () => {
                     },
                 },
             },
+        },
+        performance: {
+            hints: 'error',               // 'warning' or false can also be used
+            maxAssetSize: 500000,         // 500 KB max per asset
+            maxEntrypointSize: 500000,    // 500 KB max per entry point
         },
     };
 };

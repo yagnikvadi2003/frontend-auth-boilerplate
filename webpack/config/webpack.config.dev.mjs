@@ -53,7 +53,6 @@ export default async () => {
             extensions: [".js", ".ts", ".tsx", ".css"],
             // alias: path.resolve(__dirname, "..", "common/routes/webpack.aliases.js"),
         },
-        stats: "errors-warnings",
         devServer: {
             hot: true,
             port: 5114,
