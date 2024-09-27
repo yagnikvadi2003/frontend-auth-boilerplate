@@ -3,6 +3,9 @@
 import path from 'path';
 import { fileURLToPath } from 'url';
 
+import paths from '../common/routes/paths.mjs';
+import webpackAliases from '../common/routes/webpack.aliases.mjs';
+
 // Convert the module URL to a file path
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -37,7 +40,7 @@ export default async () => {
 
     return {
         mode: "production",
-        entry: path.resolve(__dirname, "..", "..", "src/index.tsx"),
+        entry: paths.appIndexJs,
         module: {
             rules,
         },
@@ -48,8 +51,8 @@ export default async () => {
         },
         plugins,
         resolve: {
+            alias: webpackAliases,
             extensions: [".js", ".ts", ".jsx", ".tsx", ".css"],
-            // alias: path.resolve(__dirname, "..", "common/routes/webpack.aliases.js"),
         },
         // stats: "errors-warnings",
         optimization: {

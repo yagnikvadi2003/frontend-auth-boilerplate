@@ -14,8 +14,7 @@
  *
  * Key functionalities:
  * 1. Define loaders for handling `.html`, `.css`, `.scss`, and other file types.
- * 2. Configure asset management through loaders like `url-loader`, `file-loader`,
- *    and `MiniCssExtractPlugin`.
+ * 2. Configure asset management through loaders like `url-loader`, `file-loader`
  * 3. Optimize file processing based on the current environment (development or production).
  *
  * @constant {Object[]} rules - An array of Webpack rule objects for processing files.
@@ -67,7 +66,6 @@
  * @see https://webpack.js.org/configuration/module/#rule for more information on configuring rules.
  */
 
-import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import { inDev } from "../helpers/webpack.helpers.mjs";
 
 import path from 'path';
@@ -98,7 +96,6 @@ const rules = [
     {
         test: /\.css|s[ac]ss$/,
         use: [
-            MiniCssExtractPlugin.loader,
             { loader: "style-loader" },
             {
                 loader: "css-loader",

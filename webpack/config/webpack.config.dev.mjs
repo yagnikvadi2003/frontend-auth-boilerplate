@@ -43,6 +43,7 @@
 import path from 'path';
 import { fileURLToPath } from 'url';
 
+import paths from '../common/routes/paths.mjs';
 import webpackAliases from '../common/routes/webpack.aliases.mjs';
 
 // Convert the module URL to a file path
@@ -107,7 +108,7 @@ export default async () => {
 
     return {
         mode: "development",
-        entry: path.resolve(__dirname, "..", "..", "src/index.tsx"),
+        entry: paths.appIndexJs,
         module: {
             rules,
         },
@@ -115,7 +116,7 @@ export default async () => {
             asyncChunks: true,
             filename: "[name].js",
             chunkFilename: "[name].chunk.js",
-            path: path.resolve(__dirname, "..", "..", "dist"),
+            path: paths.appBuild,
             clean: true,
         },
         plugins,
@@ -149,7 +150,7 @@ export default async () => {
                 },
             },
             static: {
-                directory: path.join(__dirname, "..", "..", "dist"),
+                directory: paths.appBuild,
                 watch: true,
             },
             devMiddleware: {
@@ -163,7 +164,7 @@ export default async () => {
         watchOptions: {
             aggregateTimeout: 300,
             poll: 1000,
-            ignored: /node_modules/,
+            ignored: paths.appNodeModules,
         },
         optimization: {
             splitChunks: {

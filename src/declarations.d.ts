@@ -20,6 +20,8 @@
 declare global {
 	interface Window {
 		startLegacyApp: Function;
+		readonly NODE_ENV: 'development' | 'production' | 'staging';
+		readonly PUBLIC_URL: string;
 	}
 }
 
@@ -158,8 +160,8 @@ declare module "*.png" {
 declare module "*.svg" {
 	import * as React from 'react';
 	export const ReactComponent: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
-    const src: string;
-    export default src;
+	const src: string;
+	export default src;
 }
 
 /**

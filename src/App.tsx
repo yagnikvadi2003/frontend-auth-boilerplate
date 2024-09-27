@@ -18,7 +18,7 @@ import "./app.css";
 const App: React.FC = (): JSX.Element => {
   return (
     <div>
-      <h1>React User Management</h1>
+      <h1 className="test">React User Management</h1>
       <ReactLogo width={50} height={50}/>
       <img src={reactLogo} alt="React logo" className="react-logo" />
     </div>
