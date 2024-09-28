@@ -153,6 +153,10 @@ export default async () => {
                 directory: paths.appBuild,
                 watch: true,
             },
+            server: {
+                type: process.env.HTTPS === true ? 'https' : 'http', // Check if HTTPS is enabled
+                options: process.env.HTTPS === true && httpsConfig ? httpsConfig : {}, // Apply httpsConfig if HTTPS is enabled, otherwise empty
+            },
             devMiddleware: {
                 index: true,
                 mimeTypes: { phtml: 'text/html' },
