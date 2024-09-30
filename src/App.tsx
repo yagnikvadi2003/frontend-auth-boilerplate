@@ -4,6 +4,7 @@ import { ReactComponent as ReactLogo } from '@assets/svgs/react.svg';
 import reactLogo from "@assets/images/download.png";
 
 import "./app.css";
+import "./style.scss";
 
 /**
  * @component App
