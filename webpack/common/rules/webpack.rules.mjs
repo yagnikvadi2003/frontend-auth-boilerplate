@@ -273,7 +273,7 @@ const moduleJsRule = {
 
 // Image Rule
 const imageRule = {
-    test: /\.(png|jpe?g|gif)(\?v=\d+\.\d+\.\d+)?$/i,
+    test: /\.(png|jpe?g|gif|ico)(\?v=\d+\.\d+\.\d+)?$/i,
     // EX. ==> 1. example.png 2. example.png?v=1.2.3
     exclude: /node_modules/,
     type: 'asset',
