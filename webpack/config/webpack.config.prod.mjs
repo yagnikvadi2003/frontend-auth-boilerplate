@@ -4,7 +4,6 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 import paths from '../common/routes/paths.mjs';
-import webpackAliases from '../common/routes/webpack.aliases.mjs';
 
 // Convert the module URL to a file path
 const __filename = fileURLToPath(import.meta.url);
@@ -34,9 +33,22 @@ const loadRules = async () => {
     }
 };
 
+// Asynchronously import resolve
+const loadResolve = async () => {
+    const resolvePath = path.resolve(__dirname, "..", "common/resolver/webpack.resolve.mjs");
+    try {
+        const module = await import(resolvePath);
+        return module.default || {};
+    } catch (err) {
+        console.error("Error loading resolve:", err);
+        return {};
+    }
+};
+
 export default async () => {
     const plugins = await loadPlugins();
     const rules = await loadRules();
+    const resolve = await loadResolve();
 
     return {
         mode: "production",
@@ -50,10 +62,7 @@ export default async () => {
             clean: true,
         },
         plugins,
-        resolve: {
-            alias: webpackAliases,
-            extensions: [".js", ".ts", ".jsx", ".tsx", ".css"],
-        },
+        resolve,
         // stats: "errors-warnings",
         optimization: {
             minimize: true,

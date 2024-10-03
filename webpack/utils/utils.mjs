@@ -125,7 +125,7 @@ export const publicUrlOrPath = getPublicUrlOrPath(
 
 export const buildPath = process.env.BUILD_PATH || 'dist';
 
-const moduleFileExtensions = [
+export const moduleFileExtensions = [
     'web.mjs',
     'mjs',
     'web.js',

@@ -44,7 +44,6 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 import paths from '../common/routes/paths.mjs';
-import webpackAliases from '../common/routes/webpack.aliases.mjs';
 
 // Convert the module URL to a file path
 const __filename = fileURLToPath(import.meta.url);
@@ -102,9 +101,39 @@ const loadRules = async () => {
     }
 };
 
+/**
+ * Asynchronously imports the Webpack resolver configuration from a specified file path.
+ *
+ * This function attempts to dynamically load a module containing the Webpack resolver 
+ * configuration. If successful, it returns the configuration object; if it fails, 
+ * it logs the error to the console and returns an empty object. This is useful for 
+ * modularizing the Webpack setup and allowing dynamic loading of configuration based on 
+ * the environment or project structure.
+ *
+ * @async
+ * @function loadResolve
+ * @returns {Promise<Object>} A promise that resolves to the Webpack resolver configuration object.
+ * @throws {Error} Throws an error if the module cannot be loaded or if the path is invalid.
+ *
+ * @example
+ * const resolveConfig = await loadResolve();
+ * // Use resolveConfig in your Webpack configuration
+ */
+const loadResolve = async () => {
+    const resolvePath = path.resolve(__dirname, "..", "common/resolver/webpack.resolve.mjs");
+    try {
+        const module = await import(resolvePath);
+        return module.default || {};
+    } catch (err) {
+        console.error("Error loading resolve:", err);
+        return {};
+    }
+};
+
 export default async () => {
     const plugins = await loadPlugins();
     const rules = await loadRules();
+    const resolve = await loadResolve();
 
     return {
         mode: "development",
@@ -120,10 +149,7 @@ export default async () => {
             clean: true,
         },
         plugins,
-        resolve: {
-            alias: webpackAliases,
-            extensions: [".js", ".ts", ".tsx", ".css"],
-        },
+        resolve,
         devServer: {
             hot: true,
             port: 5114,
