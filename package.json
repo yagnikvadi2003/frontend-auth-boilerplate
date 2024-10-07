@@ -31,8 +31,8 @@
     "start:web": "NODE_ENV=development webpack-dev-server --config ./webpack/connection/webpack.config.mjs",
     "start:staging:web": "NODE_ENV=staging webpack-dev-server --config ./webpack/connection/webpack.config.mjs",
     "start:production:web": "NODE_ENV=production webpack serve --config ./webpack/connection/webpack.config.mjs",
-    "build:staging": "webpack --config ./webpack/connection/webpack.config.mjs",
-    "build:production": "webpack --config ./webpack/connection/webpack.config.mjs",
+    "build:staging": "NODE_ENV=development webpack --config ./webpack/connection/webpack.config.mjs",
+    "build:production": "NODE_ENV=production webpack --config ./webpack/connection/webpack.config.mjs",
     "cache:clear:npm": "npm cache clean --force",
     "cache:clear:yarn": "yarn cache clean",
     "cache:clear:pnpm": "pnpm store prune",
@@ -47,12 +47,12 @@
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.25.6",
-    "@babel/core": "^7.25.2",
+    "@babel/cli": "^7.25.7",
+    "@babel/core": "^7.25.7",
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
-    "@babel/preset-env": "^7.25.4",
-    "@babel/preset-react": "^7.24.7",
-    "@babel/preset-typescript": "^7.24.7",
+    "@babel/preset-env": "^7.25.7",
+    "@babel/preset-react": "^7.25.7",
+    "@babel/preset-typescript": "^7.25.7",
     "@commitlint/cli": "^19.5.0",
     "@commitlint/config-conventional": "^19.5.0",
     "@commitlint/prompt-cli": "^19.5.0",
@@ -61,7 +61,7 @@
     "@svgr/webpack": "^8.1.0",
     "@types/dotenv-webpack": "^7.0.7",
     "@types/node": "^22.7.4",
-    "@types/react": "^18.3.10",
+    "@types/react": "^18.3.11",
     "@types/react-dev-utils": "^9.0.15",
     "@types/react-dom": "^18.3.0",
     "@types/webpack": "^5.28.5",
@@ -69,6 +69,7 @@
     "compression-webpack-plugin": "^11.1.0",
     "copy-webpack-plugin": "^12.0.2",
     "css-loader": "^7.1.2",
+    "css-minimizer-webpack-plugin": "^7.0.0",
     "dotenv": "^16.4.5",
     "dotenv-expand": "^11.0.6",
     "dotenv-webpack": "^8.1.0",
@@ -80,7 +81,7 @@
     "mini-css-extract-plugin": "^2.9.1",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-loader": "^8.1.1",
-    "postcss-preset-env": "^10.0.5",
+    "postcss-preset-env": "^10.0.6",
     "process": "^0.11.10",
     "react-dev-utils": "^12.0.1",
     "resolve-url-loader": "^5.0.0",
@@ -119,9 +120,9 @@
     "node_modules",
     "pnpm-lock.yaml"
   ],
-  "packageManager": "pnpm@9.11.0",
+  "packageManager": "pnpm@9.12.0",
   "engines": {
-    "node": "20.17.0"
+    "node": "20.18.0"
   },
   "os": [
     "linux"

@@ -156,7 +156,7 @@ const plugins = [
                 from: "public/favicon.ico",
                 to: paths.appBuild,
             },
-            { from: "public", to: paths.appPublic },
+            { from: "public", to: "public" },
         ],
         options: {
             concurrency: 100,

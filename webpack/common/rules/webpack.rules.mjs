@@ -24,9 +24,8 @@
  * 11. **@svgr/webpack**: Converts SVG files into React components, enabling easy integration of SVGs in React applications with customizable properties.
  * 12. **markdown-loader**: Processes Markdown files and converts them into HTML, allowing Markdown content to be included in web applications easily.
  * 13. **@mdx-js/loader**: Transforms MDX files (Markdown with JSX) into React components, combining the ease of writing Markdown with the flexibility of React.
- * 14. **source-map-loader**: Extracts source maps from existing JavaScript files, enabling better debugging experiences in development environments by mapping minified code back to original sources.
- * 15. Optimize file processing based on the current environment (development or production).
- * 16. Support for CSS modules and dynamic error handling to ensure rules are correctly configured.
+ * 14. Optimize file processing based on the current environment (development or production).
+ * 15. Support for CSS modules and dynamic error handling to ensure rules are correctly configured.
  *
  * @constant {Object[]} rules - An array of Webpack rule objects for processing files.
  * @property {RegExp} test - Regular expressions to match specific file extensions (e.g., `.css`, `.scss`, `.svg`).
@@ -106,7 +105,7 @@ const getStyleLoaders = (cssOptions, preProcessor) => {
         !inDev() && {
             loader: MiniCssExtractPlugin.loader,
             options: paths.publicUrlOrPath.startsWith('.')
-                ? { publicPath: '../../' }
+                ? { publicPath: '../../../' }
                 : {},
         },
         {
@@ -160,18 +159,6 @@ const getStyleLoaders = (cssOptions, preProcessor) => {
 
 // Declare the rules array before adding rules to it
 const rules = [];
-
-// Add source-map-loader to handle source maps
-const sourceMapRule = !inDev() && shouldUseSourceMap && {
-    enforce: 'pre',
-    exclude: /@babel(?:\/|\\{1,2})runtime/,
-    test: /\.(js|mjs|jsx|ts|tsx|css)$/,
-    loader: 'source-map-loader',
-};
-
-if (sourceMapRule) {
-    rules.push(sourceMapRule);
-}
 
 // HTML Rule
 const htmlRule = {
