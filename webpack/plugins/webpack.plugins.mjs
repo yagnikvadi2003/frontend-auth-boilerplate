@@ -134,7 +134,7 @@ const plugins = [
 
     !inDev() && new MiniCssExtractPlugin({
         filename: "static/css/[name].[contenthash:8].css",
-        chunkFilename: "static/css/[name].[contenthash:8].chunk.css",
+        chunkFilename: "static/css/[id].[contenthash:8].chunk.css",
     }),
 
     // Makes some environment variables available in index.html.
@@ -167,6 +167,7 @@ const plugins = [
         // https://stackoverflow.com/a/65018686/14239942
         // handle Uncaught ReferenceError: process is not defined
         process: "process/browser",
+        Buffer: ["buffer", "Buffer"],
     }),
 ].filter(Boolean);
 

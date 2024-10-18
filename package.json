@@ -33,6 +33,8 @@
     "start:production:web": "NODE_ENV=production webpack serve --config ./webpack/connection/webpack.config.mjs",
     "build:staging": "NODE_ENV=development webpack --config ./webpack/connection/webpack.config.mjs",
     "build:production": "NODE_ENV=production webpack --config ./webpack/connection/webpack.config.mjs",
+    "format": "prettier --write 'src/**/*.{js,ts,tsx,css,scss,md,json}' --config ./.prettierrc.mjs",
+    "pre:commit": "pnpm run prettier",
     "cache:clear:npm": "npm cache clean --force",
     "cache:clear:yarn": "yarn cache clean",
     "cache:clear:pnpm": "pnpm store prune",
@@ -77,11 +79,13 @@
     "html-loader": "^5.1.0",
     "html-webpack-plugin": "^5.6.0",
     "husky": "^9.1.6",
+    "lint-staged": "^15.2.10",
     "markdown-loader": "^8.0.0",
     "mini-css-extract-plugin": "^2.9.1",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-loader": "^8.1.1",
     "postcss-preset-env": "^10.0.6",
+    "prettier": "3.3.3",
     "process": "^0.11.10",
     "react-dev-utils": "^12.0.1",
     "resolve-url-loader": "^5.0.0",
@@ -101,8 +105,14 @@
   },
   "husky": {
     "hooks": {
-      "commit-msg": "pnpm commitlint"
+      "commit-msg": "pnpm commitlint",
+      "pre-commit": "lint-staged"
     }
+  },
+  "lint-staged": {
+    "src/**/*.{js,ts,tsx,css,scss,md,json}": [
+      "prettier --write"
+    ]
   },
   "browserslist": {
     "production": [
@@ -120,7 +130,7 @@
     "node_modules",
     "pnpm-lock.yaml"
   ],
-  "packageManager": "pnpm@9.12.0",
+  "packageManager": "pnpm@9.12.1",
   "engines": {
     "node": "20.18.0"
   },

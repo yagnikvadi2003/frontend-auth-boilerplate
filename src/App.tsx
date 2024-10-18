@@ -1,6 +1,6 @@
 import React from "react";
 
-import { ReactComponent as ReactLogo } from '@assets/svgs/react.svg';
+import { ReactComponent as ReactLogo } from "@assets/svgs/react.svg";
 import reactLogo from "@assets/images/download.png";
 
 import "./app.css";
@@ -17,13 +17,20 @@ import "./style.scss";
  * A JSX element that renders a `div` containing the text "App".
  */
 const App: React.FC = (): JSX.Element => {
-  return (
-    <div>
-      <h1 className="test">React User Management</h1>
-      <ReactLogo width={50} height={50}/>
-      <img src={reactLogo} alt="React logo" className="react-logo" />
-    </div>
-  );
+	return (
+		<div>
+			<h1 className="test">React User Management</h1>
+			<ReactLogo
+				width={50}
+				height={50}
+			/>
+			<img
+				src={reactLogo}
+				alt="React logo"
+				className="react-logo"
+			/>
+		</div>
+	);
 };
 
 export default App;

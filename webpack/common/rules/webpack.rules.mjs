@@ -163,6 +163,7 @@ const rules = [];
 // HTML Rule
 const htmlRule = {
     test: /\.html$/i,
+    include: path.resolve(__dirname, '..', '..', '..', 'public'),
     exclude: /node_modules/,
     use: [
         {
@@ -181,6 +182,7 @@ const htmlRule = {
 // CSS Rule
 const cssRule = {
     test: cssRegex,
+    include: path.resolve(__dirname, '..', '..', '..', 'src'),
     exclude: cssModuleRegex,
     use: getStyleLoaders({
         importLoaders: 1,
@@ -195,6 +197,7 @@ const cssRule = {
 // CSS Module Rule
 const cssModuleRule = {
     test: cssModuleRegex,
+    include: path.resolve(__dirname, '..', '..', '..', 'src'),
     use: getStyleLoaders({
         importLoaders: 1,
         sourceMap: shouldUseSourceMap,
@@ -208,6 +211,7 @@ const cssModuleRule = {
 // SASS Rule
 const sassRule = {
     test: sassRegex,
+    include: path.resolve(__dirname, '..', '..', '..', 'src'),
     exclude: sassModuleRegex,
     use: getStyleLoaders(
         {
@@ -225,6 +229,7 @@ const sassRule = {
 // JavaScript and TypeScript Rules
 const jsTsRule = {
     test: /\.[jt]sx?$/,
+    include: path.resolve(__dirname, '..', '..', '..', 'src'),
     exclude: /(node_modules|\.webpack)/,
     use: [
         {
@@ -244,6 +249,7 @@ const jsTsRule = {
 // Module JavaScript Rules
 const moduleJsRule = {
     test: /\.m?js$/,
+    include: path.resolve(__dirname, '..', '..', '..', 'webpack'),
     exclude: /node_modules/,
     use: [
         {
@@ -251,9 +257,6 @@ const moduleJsRule = {
             options: {
                 configFile: path.resolve(__dirname, "..", "..", "..", "babel.config.mjs"),
             },
-        },
-        {
-            loader: 'ts-loader',
         },
     ],
 };
@@ -279,6 +282,7 @@ const imageRule = {
 // SVGs Rule
 const svgRule = {
     test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+    include: path.resolve(__dirname, '..', '..', '..', 'src/assets/svgs'),
     // EX. ==> 1. example.svg 2. example.svg?v=1.2.3
     issuer: /\.([jt]sx|md|mdx)?$/,
     use: [
@@ -316,6 +320,8 @@ const svgRule = {
 // font Rules
 const fontRule = {
     test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
+    include: path.resolve(__dirname, '..', '..', '..', 'src/assets/fonts'),
+    exclude: /(node_modules|\.webpack)/,
     use: [
         {
             loader: 'file-loader',

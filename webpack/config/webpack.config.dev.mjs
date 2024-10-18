@@ -142,9 +142,9 @@ export default async () => {
             rules,
         },
         output: {
-            asyncChunks: true,
+            pathinfo: true,
             filename: "[name].js",
-            chunkFilename: "[name].chunk.js",
+            chunkFilename: "[id].chunk.js",
             path: paths.appBuild,
             clean: true,
         },

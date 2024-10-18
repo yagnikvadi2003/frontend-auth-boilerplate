@@ -1,7 +1,7 @@
 // !Global Window Extensions
 /**
  * Extend the global `Window` interface to include custom properties or methods.
- * This allows TypeScript to recognize and type-check global properties or functions that 
+ * This allows TypeScript to recognize and type-check global properties or functions that
  * are added to the `window` object, which may be introduced by external scripts or libraries.
  *
  * * Example Usage:
@@ -20,7 +20,7 @@
 declare global {
 	interface Window {
 		startLegacyApp: Function;
-		readonly NODE_ENV: 'development' | 'production' | 'staging';
+		readonly NODE_ENV: "development" | "production" | "staging";
 		readonly PUBLIC_URL: string;
 	}
 }
@@ -158,7 +158,7 @@ declare module "*.png" {
  * <MySvg /> // You can use it as a React component
  */
 declare module "*.svg" {
-	import * as React from 'react';
+	import * as React from "react";
 	export const ReactComponent: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
 	const src: string;
 	export default src;

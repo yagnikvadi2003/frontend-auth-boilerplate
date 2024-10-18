@@ -115,6 +115,7 @@ export default async () => {
             rules,
         },
         output: {
+            path: paths.appBuild,
             filename: "[name].[fullhash].js",
             chunkFilename: "[id].[chunkhash].js",
             clean: true,
