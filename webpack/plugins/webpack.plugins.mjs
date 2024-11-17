@@ -73,7 +73,11 @@
  * @see https://webpack.js.org/plugins/ for more information on configuring plugins.
  */
 
+import path from 'path';
+import { fileURLToPath } from 'url';
+
 import webpack from "webpack";
+import WebpackBuildNotifierPlugin from "webpack-build-notifier";
 import CopyPlugin from "copy-webpack-plugin";
 import CompressionPlugin from "compression-webpack-plugin";
 import HtmlWebpackPlugin from "html-webpack-plugin";
@@ -85,6 +89,10 @@ import InterpolateHtmlPlugin from 'react-dev-utils/InterpolateHtmlPlugin.js';
 import getClientEnvironment from "../common/environment/env.mjs";
 import { inDev } from "../common/helpers/webpack.helpers.mjs";
 import paths from "../common/routes/paths.mjs";
+
+// Convert the module URL to a file path
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // We will provide `paths.publicUrlOrPath` to our app
 // as %PUBLIC_URL% in `index.html` and `process.env.PUBLIC_URL` in JavaScript.
@@ -120,6 +128,20 @@ const plugins = [
                 : undefined
         )
     ),
+
+    // !Note: Some systems may need notification permissions to be enabled for these to appear. Check your system’s notification settings 
+    // !if they don’t display.
+    inDev() && new WebpackBuildNotifierPlugin({
+        title: "Interface Guide",
+        logo: path.resolve(__dirname, "..", "..", "public/favicon.ico"),
+        suppressSuccess: true, // don't spam success notifications
+        suppressWarning: true, // Shows notifications for warnings
+        sound: "Funk", // Plays a sound for build notifications; options include: "Funk", "Basso", "Glass", etc.
+        successSound: "Submarine", // Sound for successful builds
+        failureSound: "Hero", // Sound for failed builds
+        warningSound: "Blow", // Sound for warnings
+        showDuration: true, // Displays build duration in notifications
+    }),
 
     // This gives some necessary context to module not found errors, such as
     // the requesting resource.

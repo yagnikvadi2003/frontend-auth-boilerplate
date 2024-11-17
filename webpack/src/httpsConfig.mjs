@@ -62,7 +62,7 @@ export async function validateKeyAndCerts({ cert, key, keyFile, crtFile }) {
             .setProtectedHeader({ alg: 'RSA-OAEP', enc: 'A256GCM' })
             .encrypt(publicKey);
     } catch (err) {
-        console.log("error:==>", `The certificate key is invalid.\n${err.message}`);
+        console.error("error:==>", `The certificate key is invalid.\n${err.message}`);
     }
 
     try {
@@ -75,7 +75,7 @@ export async function validateKeyAndCerts({ cert, key, keyFile, crtFile }) {
         // You can log or use the decrypted message if needed
         console.log('Decrypted message:', decryptedMessage);
     } catch (err) {
-        console.log("error:==>", `The certificate key is invalid.\n${err.message}`);
+        console.error("error:==>", `The certificate key is invalid.\n${err.message}`);
     }
 }
 

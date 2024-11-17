@@ -113,10 +113,10 @@ function getPublicUrlOrPath(isEnvDevelopment, homepage, envPublicUrl) {
 
 // We use `PUBLIC_URL` environment variable or "homepage" field to infer
 // "public path" at which the app is served.
-// webpack needs to know it to put the right <script> hrefs into HTML even in
-// single-page apps that may serve index.html for nested URLs like /todos/42.
+// webpack needs to know it to put the right <script> href into HTML even in
+// single-page apps that may serve index.html for nested URLs like /todo/42.
 // We can't use a relative path in HTML because we don't want to load something
-// like /todos/42/static/js/bundle.7289d.js. We have to know the root.
+// like /todo/42/static/js/bundle.7289d.js. We have to know the root.
 export const publicUrlOrPath = getPublicUrlOrPath(
     process.env.NODE_ENV === 'development',
     packageJson.homepage,
