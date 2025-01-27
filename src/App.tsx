@@ -1,4 +1,4 @@
-import React from "react";
+import React, { JSX } from "react";
 
 import { ReactComponent as ReactLogo } from "@assets/svgs/react.svg";
 import reactLogo from "@assets/images/download.png";

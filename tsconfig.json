@@ -1,8 +1,9 @@
 {
     "compilerOptions": {
-        "target": "ES6",
+        "target": "ES2022",
         "lib": [
             "DOM",
+            "DOM.Iterable",
             "ESNext"
         ],
         "jsx": "react-jsx",
@@ -15,6 +16,11 @@
         "allowSyntheticDefaultImports": true,
         "forceConsistentCasingInFileNames": true,
         "strict": true,
+        "noImplicitAny": true, // Enforce explicit type annotations
+        "strictNullChecks": true, // Enforce strict null checks
+        "strictBindCallApply": true, // Check parameter types in bind, call, and apply methods
+        "noImplicitThis": true, // Catch unbound 'this' references
+        "useUnknownInCatchVariables": true, // Ensure 'unknown' type for catch variables
         "skipLibCheck": true,
     }
 }
